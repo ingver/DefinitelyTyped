@@ -31,9 +31,15 @@ declare namespace WebpackDevServer {
 
     type ProxyConfigArray = ProxyConfigArrayItem[];
 
+    interface Context {
+        match: RegExpMatchArray;
+        parsedUrl: Url;
+    }
+    type RewriteTo = (context: Context) => string;
+
     interface Rewrite {
         from: RegExp;
-        to: string;
+        to: string | RegExp | RewriteTo;
     }
 
     interface HistoryApiFallbackConfig {
